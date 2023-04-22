@@ -1,0 +1,103 @@
+
+import random
+
+# Dictionary of riddles
+riddles = {
+    "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?": "echo",
+    "I am taken from a mine, and shut up in a wooden case, from which I am never released, and yet I am used by almost every person. What am I?": "pencil",
+    "The person who makes it, sells it. The person who buys it, never uses it. The person who uses it, never knows they're using it. What is it?": "coffin"
+}
+
+# Dictionary of weapons
+weapons = {
+    "sword": "echo",
+    "gun": "pencil",
+    "bow": "coffin"
+}
+
+# Dictionary of keys and doors
+keys_and_doors = {
+    "key1": "door1",
+    "key2": "door2",
+    "key3": "door3"
+}
+
+# Variables for game state
+current_level = 1
+current_lives = 3
+current_weapon = None
+current_key = None
+
+# Function to display a riddle
+def display_riddle():
+    riddle = random.choice(list(riddles.keys()))
+    print("Level:", current_level)
+    print("Lives:", current_lives)
+    print("Weapon:", current_weapon)
+    print("Key:", current_key)
+    print("\nRiddle:")
+    print(riddle)
+    return riddle # Return the selected riddle
+
+# Game loop
+while current_level <= 3 and current_lives > 0:
+    current_riddle = display_riddle() # Update current_riddle with the selected riddle
+    answer = input("\nEnter your answer: ")
+
+    # Check if answer is correct
+    if answer.lower() == riddles[current_riddle]:
+        print("Correct!")
+        current_weapon = input("Select a weapon from the list (sword, gun, bow): ")
+        if current_weapon in weapons.keys():
+            if weapons[current_weapon] == riddles[current_riddle]:
+                current_key = input("Select a key from the list (key1, key2, key3): ")
+                if current_key in keys_and_doors.keys():
+                    if keys_and_doors[current_key] == current_weapon:
+                        print("Door unlocked! Moving to the next level.")
+                        current_level += 1
+                        current_lives += 1
+                        current_weapon = None
+                        current_key = None
+                    else:
+                        print("Incorrect key. Try again.")
+                else:
+                    print("Invalid key. Try again.")
+            else:
+                print("Incorrect weapon. Try again.")
+        else:
+            print("Invalid weapon. Try again.")
+    else:
+        print("Incorrect!")
+        current_lives -= 1
+        if current_lives == 0:
+            print("Out of lives. Game over.")
+            break
+        else:
+            print("Lost one life. Continuing to the next riddle.")
+
+# Game completed
+if current_level > 3:
+    print("Congratulations! You have completed all levels of the game.")
+    print("Final Level:", current_level)
+    print("Remaining Lives:", current_lives)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------
+2.income tax
+
+def calculate_income_tax(net_income):
+    tax = 0
+    if net_income > 1000000:
+        tax += (net_income - 1000000) * 0.3
+        net_income = 1000000
+    if net_income > 500000:
+        tax += (net_income - 500000) * 0.2
+        net_income = 500000
+    if net_income > 250000:
+        tax += (net_income - 250000) * 0.05
+    return tax
+
+# Test the function with sample inputs
+print("Priya's income tax:", calculate_income_tax(300000))
+print("Rathish's income tax:", calculate_income_tax(800000))
